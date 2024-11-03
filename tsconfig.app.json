@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "emitDeclarationOnly": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "composite": true,
+
+    /* Aliases with default imports */
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": ["./1_app/*"],
+      "@pages/*": ["./2_pages/*"],
+      "@widgets/*": ["./3_widgets/*"],
+      "@features/*": ["./4_features/*"],
+      "@entities/*": ["./5_entities/*"],
+      "@shared/*": ["./6_shared/*"]
+    },
+    "types": ["./src/vite-env.d.ts"]
+  },
+  "include": ["src", "src/**/*.tsx"]
+}

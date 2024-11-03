@@ -1,0 +1,70 @@
+.button {
+  color: var(--color-gray-90);
+  font-size: var(--font-s);
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+}
+
+.header {
+  border: 1.5px solid var(--color-gray-60);
+  background-color: var(--color-gray-20);
+  padding: 10px 12px;
+  border-radius: 20px;
+}
+
+.card {
+  width: 100%;
+  background-color: var(--color-blue-60);
+  font-weight: 700;
+  padding-block: 4px;
+  border-radius: 7px;
+}
+
+.promo-card {
+  background-color: var(--color-light-blue);
+  font-size: var(--font-l);
+  font-weight: 600;
+  padding: 15px 25px;
+  border-radius: 15px;
+}
+
+.promo-banner {
+  background-color: var(--color-gray-90);
+  color: var(--color-black);
+  font-size: var(--font-xs);
+  font-weight: 800;
+  border-radius: 50px;
+  padding: 6px 17px;
+}
+
+.search {
+  background: var(--color-gradient);
+  font-size: var(--font-l);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.blue {
+  background-color: var(--color-blue-60);
+}
+
+.dark-blue {
+  background-color: var(--color-blue);
+}
+
+.no-border {
+  border: none;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    opacity: 0.8;
+  }
+}
+
+@media (hover: none) {
+  .button:active {
+    opacity: 0.8;
+  }
+}
