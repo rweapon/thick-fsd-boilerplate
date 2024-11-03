@@ -1,9 +1,9 @@
-import styles from "./Page.module.css";
-
 export default function Home() {
   return (
-    <div className={styles.Home}>
-      
-    </div>
+    <main className="flex items-center justify-center p-8">
+      <section>
+        <h1 className="text-3xl font-bold">Hello world!</h1>
+      </section>
+    </main>
   );
 }
