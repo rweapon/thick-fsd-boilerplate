@@ -1,10 +1,14 @@
 import "./styles/index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import BaseLayout from "./layouts/BaseLayout";
+import AppProvider from "@app/providers/AppProvider";
+import { RouterProvider } from "react-router-dom";
+import { appRouter } from "@app/appRouter";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BaseLayout />
+    <AppProvider>
+      <RouterProvider router={appRouter} />
+    </AppProvider>
   </StrictMode>
 );
