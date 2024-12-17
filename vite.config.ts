@@ -7,7 +7,7 @@ import tailwindcss from "tailwindcss";
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    port: 3000,
+    port: 4000,
   },
   resolve: {
     alias: {
