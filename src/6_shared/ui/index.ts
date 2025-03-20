@@ -1,4 +1,3 @@
-import ButtonC from "@shared/ui/Button/Button";
-import EmojiSpan from "@shared/ui/EmojiSpan/EmojiSpan";
+import { Button } from "@shared/ui/Button/Button";
 
-export { ButtonC, EmojiSpan };
+export { Button };

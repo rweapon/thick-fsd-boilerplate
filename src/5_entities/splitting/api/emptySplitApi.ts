@@ -1,10 +1,6 @@
 import { RootState } from "@app/appStore";
-import {
-  BaseQueryFn,
-  createApi,
-  FetchArgs,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { FetchArgs, BaseQueryFn } from "@reduxjs/toolkit/query/react";
 
 export interface ICustomError {
   data: {

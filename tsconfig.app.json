@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "emitDeclarationOnly": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -33,7 +33,7 @@
       "@entities/*": ["./5_entities/*"],
       "@shared/*": ["./6_shared/*"]
     },
-    "types": ["./src/6_shared/interfaces/vite-env.d.ts"]
+    "types": ["./src/6_shared/model/interfaces/vite-env.d.ts"]
   },
   "include": ["src"]
 }
