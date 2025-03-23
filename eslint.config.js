@@ -1,95 +1,90 @@
+import antfu from "@antfu/eslint-config";
 import js from "@eslint/js";
-import globals from "globals";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import tseslint from "typescript-eslint";
 import i18next from "eslint-plugin-i18next";
-import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
-import importPlugin from "eslint-plugin-import";
-import jsxA11y from "eslint-plugin-jsx-a11y";
+import tailwind from "eslint-plugin-tailwindcss";
+import fsdPlugin from "./eslint-plugin-fsd-lint/index.js";
 
-export default tseslint.config(
-  { ignores: ["./git", "./vscode", "dist", "node_modules", "README.md"] },
+export default antfu(
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      i18next.configs["flat/recommended"],
-      eslintPluginPrettierRecommended,
-      importPlugin.flatConfigs.recommended,
-      jsxA11y.flatConfigs.recommended,
-    ],
+    type: "app",
+    react: true,
+    typescript: true,
+    formatters: {
+      html: false,
+      css: false,
+      markdown: false,
+    },
+    stylistic: {
+      indent: 2,
+      semi: true,
+      quotes: "double",
+    },
+    ignores: ["./git", "./vscode", "dist", "node_modules", "README.md", "eslint-plugin-fsd-lint"],
+  },
+  [js.configs.recommended, i18next.configs["flat/recommended"], ...tailwind.configs["flat/recommended"]],
+  {
+    name: "fsdPlugin",
+    plugins: {
+      fsd: fsdPlugin,
+    },
     files: ["**/*.{ts,tsx}"],
+    rules: {
+      "fsd/forbidden-imports": "error",
+      "fsd/no-relative-imports": "error",
+      "fsd/no-public-api-sidestep": "error",
+      "fsd/no-cross-slice-dependency": "off",
+      "fsd/no-ui-in-business-logic": "off",
+      "fsd/no-global-store-imports": "off",
+      "fsd/ordered-imports": "warn",
+    }
+  },
+  {
+    files: ["**/*.{ts,tsx}"],
+    rules: {
+      "ts/no-redeclare": "off",
+      "ts/consistent-type-definitions": ["error", "type"],
+      "no-unused-vars": "off",
+      "ts/no-unused-vars": "error",
+      "no-console": ["error", { allow: ["warn", "error"] }],
+      "antfu/no-top-level-await": ["off"],
+      "node/prefer-global/process": ["off"],
+      "node/no-process-env": ["error"],
+      "perfectionist/sort-imports": [
+        "error",
+        {
+          tsconfigRootDir: ".",
+        },
+      ],
+      "unicorn/filename-case": [
+        "error",
+        {
+          cases: { pascalCase: true, camelCase: true },
+          ignore: ["README.md", "vite-env.d.ts"],
+        },
+      ],
+      "i18next/no-literal-string": "off",
+    },
+  },
+  {
+    name: "tailwind",
     settings: {
-      react: {
-        version: "detect",
+      tailwindcss: {
+        callees: ["classnames", "clsx", "ctl"],
+        config: "tailwind.config.js",
+        cssFiles: [
+          "**/*.css",
+          "!**/node_modules",
+          "!**/.*",
+          "!**/dist",
+          "!**/build",
+        ],
+        cssFilesRefreshRate: 5_000,
+        removeDuplicates: true,
+        skipClassAttribute: false,
+        whitelist: [],
+        tags: [], // can be set to e.g. ['tw'] for use in tw`bg-blue`
+        classRegex: "^class(Name)?$", // can be modified to support custom attributes. E.g. "^tw$" for `twin.macro`
       },
     },
-    languageOptions: {
-      ecmaVersion: "latest",
-      globals: globals.browser,
-    },
-    plugins: {
-      react,
-      "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      quotes: ["error", "double"],
-      "@typescript-eslint/no-unused-vars": "warn",
-      "no-console": "warn",
-      "no-alert": "error",
-      "prefer-const": "warn",
-      indent: ["warn", 2],
-      "linebreak-style": "off",
-      "arrow-parens": "off",
-      "object-curly-newline": "off",
-      "no-mixed-operators": "off",
-      "function-paren-newline": "off",
-      "no-plusplus": "off",
-      "space-before-function-paren": 0,
-      // "max-len": [
-      //   "error",
-      //   120,
-      //   2,
-      //   {
-      //     ignoreUrls: true,
-      //   },
-      // ],
-      "i18next/no-literal-string": "off",
-      "jsx-a11y/anchor-is-valid": [
-        "error",
-        {
-          components: ["Link"],
-          specialLink: ["to"],
-        },
-      ],
-      "jsx-a11y/label-has-for": [
-        2,
-        {
-          required: {
-            every: ["id"],
-          },
-        },
-      ],
-      "react/react-in-jsx-scope": "off",
-      "react/function-component-definition": [
-        "error",
-        {
-          namedComponents: "function-declaration",
-        },
-      ],
-      "import/no-unresolved": "off",
-      "import/no-extraneous-dependencies": "off",
-      "prettier/prettier": [
-        "warn",
-        {
-          endOfLine: "auto",
-        },
-      ],
-    },
-  }
+  },
 );

@@ -1,13 +1,13 @@
-import { RootState } from "@app/appStore";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { FetchArgs, BaseQueryFn } from "@reduxjs/toolkit/query/react";
+import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/query/react";
 
-export interface ICustomError {
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+export type ICustomError = {
   data: {
     error: string;
   };
   status: number;
-}
+};
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "example.com",
@@ -21,6 +21,6 @@ const baseQuery = fetchBaseQuery({
 }) as BaseQueryFn<string | FetchArgs, unknown, ICustomError, object>;
 
 export const emptySplitApi = createApi({
-  baseQuery: baseQuery,
+  baseQuery,
   endpoints: () => ({}),
 });
