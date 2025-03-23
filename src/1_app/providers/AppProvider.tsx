@@ -1,8 +1,10 @@
+import type { ReactNode } from "react";
+
+import { store } from "@app/appStore";
 import { Provider } from "react-redux";
-import { store } from "../appStore";
 
 type AppProviderProps = {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode | ReactNode[];
 };
 
 export default function AppProvider({ children }: AppProviderProps) {

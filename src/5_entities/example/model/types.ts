@@ -1,3 +1,3 @@
-export interface IExample {
+export type IExample = {
   name: string;
-}
+};

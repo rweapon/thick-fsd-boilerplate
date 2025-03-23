@@ -1,13 +1,12 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
-import svgr from "vite-plugin-svgr";
+import path from "node:path";
+import { visualizer } from "rollup-plugin-visualizer";
 import tailwindcss from "tailwindcss";
+import { defineConfig } from "vite";
 import { compression } from "vite-plugin-compression2";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import Inspect from "vite-plugin-inspect";
-import { visualizer } from "rollup-plugin-visualizer";
-
+import svgr from "vite-plugin-svgr";
 // https://vitejs.dev/config/
 export default defineConfig({
   // server: {
@@ -48,7 +47,7 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           const HugeLibraries = ["@reduxjs", "react-dom"];
-          if (HugeLibraries.some((libName) => id.includes(`node_modules/${libName}`))) {
+          if (HugeLibraries.some(libName => id.includes(`node_modules/${libName}`))) {
             return id.toString().split("node_modules/")[1].split("/")[0].toString();
           }
         },
