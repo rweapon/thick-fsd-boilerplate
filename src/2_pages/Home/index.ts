@@ -1,3 +1,3 @@
-import Home from "@pages/Home/ui/Page";
+import Home from "./ui/Page";
 
 export { Home };

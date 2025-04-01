@@ -1,12 +1,9 @@
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 
-import { store } from "@app/appStore";
 import { Provider } from "react-redux";
 
-type AppProviderProps = {
-  children: ReactNode | ReactNode[];
-};
+import { store } from "../appStore";
 
-export default function AppProvider({ children }: AppProviderProps) {
+export default function AppProvider({ children }: PropsWithChildren) {
   return <Provider store={store}>{children}</Provider>;
 }
