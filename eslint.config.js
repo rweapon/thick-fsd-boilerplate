@@ -1,8 +1,8 @@
 import antfu from "@antfu/eslint-config";
 import js from "@eslint/js";
+import fsdPlugin from "eslint-plugin-fsd-lint";
 import i18next from "eslint-plugin-i18next";
 import tailwind from "eslint-plugin-tailwindcss";
-import fsdPlugin from "./eslint-plugin-fsd-lint/index.js";
 
 export default antfu(
   {
@@ -29,14 +29,21 @@ export default antfu(
     },
     files: ["**/*.{ts,tsx}"],
     rules: {
-      "fsd/forbidden-imports": "error",
+      "fsd/forbidden-imports": ["warn", { alias: {
+        value: "@",
+        withSlash: false,
+      }, folderPattern: {
+        enabled: true,
+        regex: "^(\\d+_)?(.*)",
+        extractionGroup: 2,
+      } }],
       "fsd/no-relative-imports": "error",
-      "fsd/no-public-api-sidestep": "error",
+      "fsd/no-public-api-sidestep": ["error", { layers: ["@app", "@pages", "@widgets", "@features", "@entities", "@shared"] }],
       "fsd/no-cross-slice-dependency": "off",
       "fsd/no-ui-in-business-logic": "off",
       "fsd/no-global-store-imports": "off",
-      "fsd/ordered-imports": "warn",
-    }
+      "fsd/ordered-imports": "off",
+    },
   },
   {
     files: ["**/*.{ts,tsx}"],
@@ -49,6 +56,15 @@ export default antfu(
       "antfu/no-top-level-await": ["off"],
       "node/prefer-global/process": ["off"],
       "node/no-process-env": ["error"],
+      "style/object-curly-newline": [1, {
+        ObjectExpression: "always",
+        ObjectPattern: { multiline: true },
+        ImportDeclaration: "never",
+        ExportDeclaration: { multiline: true, minProperties: 3 },
+      }],
+      "style/jsx-closing-bracket-location": [1, "line-aligned"],
+      "style/jsx-first-prop-new-line": [1, "multiprop"],
+      "style/key-spacing": "error",
       "perfectionist/sort-imports": [
         "error",
         {
